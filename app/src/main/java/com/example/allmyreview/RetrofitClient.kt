@@ -11,6 +11,6 @@ object RetrofitClient{
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-    fun getRetrofitService(): ApiUrlService = getRetrofit().create(ApiUrlService::class.java)
+    fun getRetrofitService(): ApiUrlInterface = getRetrofit().create(ApiUrlInterface::class.java)
 }
 

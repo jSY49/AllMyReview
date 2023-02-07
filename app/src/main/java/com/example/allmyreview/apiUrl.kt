@@ -15,9 +15,9 @@ class apiUrl{
 
 }
 
-interface ApiUrlService{
+interface ApiUrlInterface{
     @GET(apiUrl.EndPoint)
-    fun getDailyBoxOffice(
+    suspend fun getDailyBoxOffice(
         @Query("targetDt") //parameter
         targetDate:String,
         @Query("key")
