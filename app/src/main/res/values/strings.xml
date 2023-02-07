@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AllMyReview</string>
+    <string name="title_home">Home</string>
+    <string name="title_review">Review</string>
+    <string name="title_user">User</string>
+
+    <string name="popular_movie">인기 영화</string>
+    <string name="new_movie">최신 영화</string>
+</resources>
