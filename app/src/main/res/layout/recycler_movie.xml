@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!--<data>
-        <variable
-            name="movieinfo"
-            type="com.example.allmyreview.MOVIEINFO" />
-    </data>-->
-
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
@@ -27,8 +21,9 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="162dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="240dp"
+                    android:adjustViewBounds="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -44,7 +39,6 @@
                     android:maxLines="1"
                     android:textStyle="bold"
                     android:gravity="center"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView" />

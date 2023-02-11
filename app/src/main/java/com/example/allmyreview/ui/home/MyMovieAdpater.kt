@@ -1,34 +1,50 @@
 package com.example.allmyreview
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.allmyreview.databinding.RecyclerMovieBinding
 
 
-class MyMovieAdapter(private var data: ArrayList<MOVIEINFO>) :
+
+class MyMovieAdapter(private var data: ArrayList<MovieResult>) :
     RecyclerView.Adapter<MyMovieAdapter.MyViewHolder>() {
 
     val TAG = "MyMovieAdapter"
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateMovies(newMovies: List<MOVIEINFO>) {
+    fun updateMovies(newMovies: List<MovieResult>) {
         data.clear()
         data.addAll(newMovies)
         notifyDataSetChanged()
     }
 
-
-
     // 생성된 뷰 홀더에 값 지정
     inner class MyViewHolder(val binding: RecyclerMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        private val context = binding.root.context
 
-        fun bind(currentMovie: MOVIEINFO) {
-           // binding.movieinfo =currentMovie
-            binding.nameText.text=currentMovie.movieNm
+        fun bind(currentMovie: MovieResult) {
+            binding.nameText.text=currentMovie.title
+            val url ="https://image.tmdb.org/t/p/original"+currentMovie.poster_path
+            Glide.with(context).load(url)
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .fitCenter()
+                .into(binding.imageView)
 //            binding.executePendingBindings() //데이터가 수정되면 즉각 반영
+
+            itemView.setOnClickListener{
+                val intent = Intent(context,MovieDetailActivity::class.java)
+                intent.putExtra("movieId",currentMovie.id)
+                intent.run{
+                    context.startActivity(this)
+                }
+
+            }
+
         }
     }
 
@@ -53,7 +69,6 @@ class MyMovieAdapter(private var data: ArrayList<MOVIEINFO>) :
     // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
         return data.size
-//        return data.value?.boxOfficeResult?.dailyBoxOfficeList?.size ?: 10
     }
 
 

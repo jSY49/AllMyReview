@@ -1,99 +1,82 @@
 package com.example.allmyreview.ui.home
 
-import android.annotation.SuppressLint
-import android.icu.util.Calendar
-import android.icu.util.GregorianCalendar
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-
 import androidx.lifecycle.ViewModel
-import com.example.allmyreview.ApiUrlInterface
-import com.example.allmyreview.MOVIEINFO
-import com.example.allmyreview.MOVIES
-import com.example.allmyreview.RetrofitClient
+import com.example.allmyreview.MovieResult
+import com.example.allmyreview.MovieResult2
+import com.example.allmyreview.MovieRetrofit.RetrofitClient
 import kotlinx.coroutines.*
 import retrofit2.*
-import java.text.SimpleDateFormat
+import java.util.*
+
 @RequiresApi(Build.VERSION_CODES.O)
 class HomeViewModel : ViewModel() {
 
-    val TAG="HomeViewModel"
+    val TAG = "HomeViewModel"
     private val movieService = RetrofitClient.getRetrofitService()
+    private val upcomingMovieService = RetrofitClient.getRetrofitService2()
     var job: Job? = null
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         onError("Exception: ${throwable.localizedMessage}")
     }
 
-    var data = MutableLiveData<List<MOVIEINFO>>()
+    var data = MutableLiveData<List<MovieResult>>()
+    var data2 = MutableLiveData<List<MovieResult2>>()
     val movieLoadError = MutableLiveData<String?>()
     val loading = MutableLiveData<Boolean>()
 
-    fun refresh() {
-        getMovieData()
+    fun refresh(want :String) {
+        getMovieData(want)
+
     }
 
-    private fun getMovieData(){
-        loading.value=true
+    private fun getMovieData(want: String) {
+        loading.value = true
 
-        job= CoroutineScope(Dispatchers.IO+exceptionHandler).launch {
-            val response = movieService.getDailyBoxOffice(getdate())
-            withContext(Dispatchers.Main) {
-                if (response.isSuccessful) {
-                    data.postValue(response.body()?.boxOfficeResult?.dailyBoxOfficeList)
-                    Log.d(TAG, response.body()?.boxOfficeResult?.dailyBoxOfficeList.toString())
-                    movieLoadError.postValue(null)
-                    loading.postValue(false)
-//                    movieLoadError.value?.let { Log.e(TAG, it) }
-//                    loading.value?.let { Log.e(TAG, it.toString()) }
-                } else {
-                    onError("Error : ${response.message()}")
-//                    movieLoadError.value?.let { Log.e(TAG, it) }
-//                    loading.value?.let { Log.e(TAG, it.toString()) }
-                }
-            }
-        }
+        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+            when(want){
+                "pop" -> {
+                    var response = movieService.getMovie()
+                    withContext(Dispatchers.Main) {
+                        Log.d(TAG, "${want}:"+response.code().toString())
+                        if (response.isSuccessful) {
+                            data.postValue(response.body()?.results)
+                            //Log.d(TAG, response.body()?.results.toString())
+                            movieLoadError.postValue(null)
+                            loading.postValue(false)
 
-
-        /*movieService.getDailyBoxOffice(getdate()).enqueue(object : retrofit2.Callback<MOVIES> {
-            // 통신 성공
-            override fun onResponse(call: Call<MOVIES>, response: Response<MOVIES>) {
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    if (body != null) {
-                        data.value=body.boxOfficeResult.dailyBoxOfficeList
+                        } else {
+                            onError("Error: ${response.message()}")
+                            // Log.d(TAG, "Movie failed")
+                        }
                     }
-                    Log.d("Retrofit onResponse", response.toString())
-                    //movieList_size = data.value!!.boxOfficeResult.dailyBoxOfficeList.size
-                    //Log.d(TAG, movieList_size.toString())
-                    //Log.d("Retrofit onResponse", data.value.toString())
-                    //Log.d("Retrofit onResponse", response.body().toString() )
+                }
+                "upcoming"->{
+                    var response = upcomingMovieService.getNewMovie()
+                    withContext(Dispatchers.Main) {
+                        Log.d(TAG, "${want}:"+response.code().toString())
+                        if (response.isSuccessful) {
+                            data2.postValue(response.body()?.results)
+                            //Log.d(TAG, response.body()?.results.toString())
+                            movieLoadError.postValue(null)
+                            loading.postValue(false)
+
+                        } else {
+                            onError("Error: ${response.message()}")
+                            // Log.d(TAG, "Movie failed")
+                        }
+                    }
+                }
+                else ->{
+                    var response = movieService.getMovie()
                 }
             }
-            // 통신 실패
-            override fun onFailure(call: Call<MOVIES>, t: Throwable) {
-                Log.e("Retrofit onFailure",t.toString())
-                call.cancel()
-            }
-        })
-    return data*/
-    }
-//    @JvmName("getData1")
-//    fun getData(): MutableLiveData<List<MOVIEINFO>>{
-//        return data
-//    }
-    @SuppressLint("SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun getdate() :String{
-        //하루 전 날짜
-        val calendar : Calendar = GregorianCalendar()
-        val SDF : SimpleDateFormat = SimpleDateFormat("yyyyMMdd")
-        calendar.add(Calendar.DATE,-1)
-        val res = SDF.format(calendar.time)
-        Log.d("getDate()",res )
-        return res
+
+
+        }
     }
 
     private fun onError(message: String) {
@@ -105,7 +88,11 @@ class HomeViewModel : ViewModel() {
         super.onCleared()
         job?.cancel()
     }
+
+
 }
+
+
 
 
 
