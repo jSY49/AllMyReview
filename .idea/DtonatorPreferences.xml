@@ -5,13 +5,10 @@
     <option name="customAnnotationPattern" value="@annotationTextHere(&quot;%s&quot;)" />
     <option name="encapsulete">
       <list>
-        <option value="PROVIDE_GETTER" />
-        <option value="PROVIDE_SETTER" />
         <option value="PROVIDE_PRIVATE_FIELD" />
       </list>
     </option>
     <option name="fieldType" value="GSON_EXPOSE" />
-    <option name="languageType" value="KOTLIN_VAR" />
     <option name="naming">
       <list>
         <option value="CAMEL_CASE" />
