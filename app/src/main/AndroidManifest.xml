@@ -13,7 +13,11 @@
         android:theme="@style/Theme.AllMyReview"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MovieDetailActivity"
+            android:name=".addReview.AddReviewActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".movieDetail.MovieDetailActivity"
             android:exported="false" />
 
         <uses-library

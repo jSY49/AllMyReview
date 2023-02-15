@@ -6,4 +6,20 @@
 
     <string name="popular_movie">인기 영화</string>
     <string name="new_movie">최신 영화</string>
+    <string name="releaseDateText">개봉일</string>
+    <string name="genresText">장르</string>
+    <string name="runTimeText">상영시간</string>
+    <string name="reviewIsNone">작성된 리뷰가 없어요:\'(</string>
+    <string name="addReview">리뷰 작성 하러 가기</string>
+    <string name="title_activity_add_reaview">AddReaviewActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+
 </resources>
