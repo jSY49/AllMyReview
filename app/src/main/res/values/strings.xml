@@ -11,15 +11,9 @@
     <string name="runTimeText">상영시간</string>
     <string name="reviewIsNone">작성된 리뷰가 없어요:\'(</string>
     <string name="addReview">리뷰 작성 하러 가기</string>
-    <string name="title_activity_add_reaview">AddReaviewActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="writeReview">리뷰를 작성해 주세요..</string>
+    <string name="writePlace">시청 장소를 작성해 주세요..</string>
+    <string name="addReviewtoDb">리뷰 저장하기</string>
 
 
 </resources>
