@@ -1,6 +1,7 @@
 package com.example.allmyreview.MovieRetrofit
 
 import com.example.allmyreview.ApiUrlInterface
+import com.example.allmyreview.Detail_ApiUrlInterface
 import com.example.allmyreview.new_ApiUrlInterface
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,5 +16,6 @@ object RetrofitClient{
 
     fun getRetrofitService(): ApiUrlInterface = getRetrofit().create(ApiUrlInterface::class.java)
     fun getRetrofitService2(): new_ApiUrlInterface = getRetrofit().create(new_ApiUrlInterface::class.java)
+    fun getRetrofitService_Detail(): Detail_ApiUrlInterface = getRetrofit().create(Detail_ApiUrlInterface::class.java)
 }
 

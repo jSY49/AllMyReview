@@ -38,7 +38,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         homeViewModel.refresh("pop")
         binding.popularMovieRecyclerView.apply {
             layoutManager = LinearLayoutManager(context).also {
@@ -58,7 +58,6 @@ class HomeFragment : Fragment() {
             adapter = myMovieAdpater2
         }
         observeViewModel2()
-
 
         return root
     }
@@ -95,6 +94,7 @@ class HomeFragment : Fragment() {
             it?.let {
                 myMovieAdpater2.updateMovies(it)
                 myMovieAdpater2.notifyDataSetChanged()
+                binding.scrollview.visibility= View.VISIBLE
             }
 
         })

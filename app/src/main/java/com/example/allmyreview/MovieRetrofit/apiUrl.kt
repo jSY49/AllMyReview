@@ -4,6 +4,7 @@ package com.example.allmyreview
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 class apiUrl{
@@ -11,6 +12,7 @@ class apiUrl{
     companion object{
         const val trendingMovie_EndPoint ="trending/movie/week"
         const val newMovie_EndPoint ="movie/upcoming"
+        const val DetailMovie_EndPoint ="movie/"
         const val TMDB_API_KEY = BuildConfig.TMDB_API
 
     }
@@ -34,6 +36,18 @@ interface new_ApiUrlInterface{
         @Query("language")
         language:String = "ko-KR",
     ): Response<upcomingMovieDb>
+}
+
+interface Detail_ApiUrlInterface{
+    @GET(apiUrl. DetailMovie_EndPoint+"{movieId}")
+    suspend fun getMovieDetail(
+        @Path("movieId")
+        moviId: Int?,
+        @Query("api_key")
+        key:String = apiUrl.TMDB_API_KEY,
+        @Query("language")
+        language:String = "ko-KR",
+    ): Response<DetailMovie>
 }
 /*
 @SuppressLint("SimpleDateFormat")

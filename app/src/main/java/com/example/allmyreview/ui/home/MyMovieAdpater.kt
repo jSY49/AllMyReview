@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.allmyreview.databinding.RecyclerMovieBinding
-
+import com.example.allmyreview.movieDetail.MovieDetailActivity
 
 
 class MyMovieAdapter(private var data: ArrayList<MovieResult>) :
@@ -37,7 +37,7 @@ class MyMovieAdapter(private var data: ArrayList<MovieResult>) :
 //            binding.executePendingBindings() //데이터가 수정되면 즉각 반영
 
             itemView.setOnClickListener{
-                val intent = Intent(context,MovieDetailActivity::class.java)
+                val intent = Intent(context, MovieDetailActivity::class.java)
                 intent.putExtra("movieId",currentMovie.id)
                 intent.run{
                     context.startActivity(this)
