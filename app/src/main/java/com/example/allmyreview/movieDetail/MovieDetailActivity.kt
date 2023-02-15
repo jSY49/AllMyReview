@@ -21,6 +21,7 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieDetailBinding
     private lateinit var detailViewModel: DetailViewModel
     private var id =0
+    private var MovieName =""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,7 @@ class MovieDetailActivity : AppCompatActivity() {
                 val detailData =detailViewModel.data
                 Log.d(TAG,"movie detail Data = "+detailData.value)
                 binding.movieTitle.text = "\"" + detailData.value!!.title + "\""
+                MovieName= detailData.value!!.title
                 binding.movieOriginalTitle.text = detailData.value!!.original_title
                 val url = "https://image.tmdb.org/t/p/original" + detailData.value!!.backdrop_path
                 Glide.with(this).load(url)
@@ -73,6 +75,7 @@ class MovieDetailActivity : AppCompatActivity() {
     fun addReviewBtn(view: View) {
         val intent = Intent(this, AddReviewActivity::class.java)
         intent.putExtra("movieId",id)
+        intent.putExtra("movieName",MovieName)
         startActivity(intent)
     }
 
