@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -20,8 +21,8 @@ class MovieDetailActivity : AppCompatActivity() {
     private val TAG = "MovieDetailActivity"
     private lateinit var binding: ActivityMovieDetailBinding
     private lateinit var detailViewModel: DetailViewModel
-    private var id =0
-    private var MovieName =""
+    private var id = 0
+    private var MovieName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,14 +36,14 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SetTextI18n")
-    fun observeViewModel(){
+    fun observeViewModel() {
 
         detailViewModel.data.observe(this, Observer {
             it?.let {
-                val detailData =detailViewModel.data
-                Log.d(TAG,"movie detail Data = "+detailData.value)
+                val detailData = detailViewModel.data
+                Log.d(TAG, "movie detail Data = " + detailData.value)
                 binding.movieTitle.text = "\"" + detailData.value!!.title + "\""
-                MovieName= detailData.value!!.title
+                MovieName = detailData.value!!.title
                 binding.movieOriginalTitle.text = detailData.value!!.original_title
                 val url = "https://image.tmdb.org/t/p/original" + detailData.value!!.backdrop_path
                 Glide.with(this).load(url)
@@ -54,29 +55,44 @@ class MovieDetailActivity : AppCompatActivity() {
                 binding.movieOverview.text =
                     if (detailData.value?.overview.equals("")) "공개된 소개글이 없어요 :-(" else detailData.value?.overview
 
-                binding.movieReleaseDate.text=detailData.value?.release_date
-                binding.movieGenres.text=getGenres(detailData.value!!.genres)
-                binding.movieRunnigTime.text= detailData.value!!.runtime.toString()+"분"
+                binding.movieReleaseDate.text = detailData.value?.release_date
+                binding.movieGenres.text = getGenres(detailData.value!!.genres)
+                binding.movieRunnigTime.text = detailData.value!!.runtime.toString() + "분"
 
-
-                binding.scrollview.visibility= View.VISIBLE
+                binding.scrollview.visibility = View.VISIBLE
             }
 
         })
+
+        detailViewModel.review.observe(this,Observer{
+            it?.let {
+                val reviewData = detailViewModel.review.value
+                Log.d(TAG,reviewData.toString())
+                if (reviewData != null) {
+                    binding.reviewText.text=reviewData.Review.get(0).overview
+                    binding.gotowriteBtn.visibility=View.GONE
+                }
+            }
+        })
+
     }
 
-    fun getGenres(genres: List<Genres>): String{
-        var str =""
-        for(i in 0 until genres.size)
-           str+=(genres.get(i).name+" ")
+    fun getGenres(genres: List<Genres>): String {
+        var str = ""
+        for (i in 0 until genres.size)
+            str += (genres.get(i).name + " ")
         return str
     }
 
     fun addReviewBtn(view: View) {
         val intent = Intent(this, AddReviewActivity::class.java)
-        intent.putExtra("movieId",id)
-        intent.putExtra("movieName",MovieName)
+        intent.putExtra("movieId", id)
+        intent.putExtra("movieName", MovieName)
         startActivity(intent)
+    }
+
+    fun gotoDetailReview(view: View) {
+
     }
 
 }

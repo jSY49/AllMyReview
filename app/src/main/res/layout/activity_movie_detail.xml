@@ -170,6 +170,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout4" />
 
             <RelativeLayout
+                android:onClick="gotoDetailReview"
                 android:id="@+id/relativeLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -178,19 +179,36 @@
                 android:background="@drawable/outline"
                 app:layout_constraintDimensionRatio="4:1"
                 app:layout_constraintTop_toBottomOf="@+id/view2"
-                tools:layout_editor_absoluteX="15dp">
+                tools:layout_editor_absoluteX="15dp"
+                android:drawablePadding="5dp"
+                >
 
                 <TextView
                     android:id="@+id/reviewText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:layout_toLeftOf="@+id/goImg"
+                    android:layout_margin="20dp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:gravity="center"
                     android:text="@string/reviewIsNone" />
+
+                <ImageView
+                    android:id="@+id/goImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@drawable/baseline_arrow_forward_ios_24"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:backgroundTint="@color/purpleBlue"
+                    />
 
             </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/gotowriteBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/addReview"
