@@ -13,9 +13,14 @@
         android:theme="@style/Theme.AllMyReview"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".login.SignUpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".addReview.AddReviewActivity"
             android:exported="false" />
-
         <activity
             android:name=".movieDetail.MovieDetailActivity"
             android:exported="false" />
