@@ -14,6 +14,6 @@ object signUpRetrofitClient{
             .build()
 
     fun getRetrofitService(): signUpApiInterface = getRetrofit().create(signUpApiInterface::class.java)
-    fun getRtService_chckEmail(): checkEmailApiInterface = getRetrofit().create(checkEmailApiInterface::class.java)
+    fun getRtService_chckId(): checkIdApiInterface = getRetrofit().create(checkIdApiInterface::class.java)
 }
 

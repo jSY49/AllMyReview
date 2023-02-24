@@ -8,11 +8,11 @@
 
 
     <EditText
-        android:id="@+id/login_email"
+        android:id="@+id/login_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/UserEmail"
+        android:hint="@string/UserId"
         android:inputType="textEmailAddress"
         android:layout_marginBottom="30dp"
         app:layout_constraintBottom_toTopOf="@+id/login_password"

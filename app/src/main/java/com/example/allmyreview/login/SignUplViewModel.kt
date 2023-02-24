@@ -9,23 +9,24 @@ import kotlinx.coroutines.*
 
 class SignUplViewModel :ViewModel() {
 
-    val TAG = "SignInlViewModel"
+    val TAG = "SignUplViewModel"
     var job: Job? = null
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         Log.e(TAG, "Exception: ${throwable.localizedMessage}")
     }
     private val SignUpService = signUpRetrofitClient.getRetrofitService()
-    private val EmailCheckService = signUpRetrofitClient.getRtService_chckEmail()
+    private val IdCheckService = signUpRetrofitClient.getRtService_chckId()
     var state= MutableLiveData<Boolean>()
-    var emailCheck= MutableLiveData<Boolean>()
+    var idCheck= MutableLiveData<Boolean>()
+    var createTable= MutableLiveData<Boolean>()
 
-    fun refresh(name: String, pw: String, email: String){
-        trySignIn(name,pw,email)
+    fun refresh(id: String,  name: String, pw: String, email: String){
+        trySignIn(id,name,pw,email)
     }
-    private fun trySignIn(name: String, pw: String, email: String){
+    private fun trySignIn(id: String,name: String, pw: String, email: String){
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val call = SignUpService.trySignin(email,pw,name)
+            val call = SignUpService.trySignup(id,email,pw,name)
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     state.postValue(true)
@@ -38,12 +39,12 @@ class SignUplViewModel :ViewModel() {
         }
     }
 
-    fun checkEmail(email : String){
+    fun checkId(id : String){
         CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val call = EmailCheckService.checkEmail(email)
+            val call = IdCheckService.checkID(id)
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
-                    emailCheck.postValue(call.body()!!.success)
+                    idCheck.postValue(call.body()!!.success)
                     Log.e(TAG, "emailCheck: ${call.raw()}")
                     Log.e(TAG, "emailCheck: ${call.body()}")
                 } else {
@@ -52,5 +53,6 @@ class SignUplViewModel :ViewModel() {
             }
         }
     }
+
 
 }

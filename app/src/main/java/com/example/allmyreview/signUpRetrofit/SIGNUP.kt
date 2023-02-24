@@ -8,5 +8,6 @@ data class SIGNUP(
 
 data class CHECK(
     val success: Boolean,
-    val UserEmail : String
+    val UserId : String
 )
+

@@ -32,16 +32,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun loginBtn(view: View) {
-        val email=binding.loginEmail.text.toString()
+        val id=binding.loginId.text.toString()
         val password=binding.loginPassword.text.toString()
 
-        loginViewModel.refresh(email,password)
+        loginViewModel.refresh(id,password)
 
         loginViewModel.state.observe(this, Observer{
             it.let {
-                if(it.UserEmail!=null){
+                if(it.UserID!=null){
                     val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
                     val autoLoginEdit = auto.edit()
+                    autoLoginEdit.putString("userID", it.UserID)
                     autoLoginEdit.putString("userEmail", it.UserEmail)
                     autoLoginEdit.putString("password", it.UserPwd)
                     autoLoginEdit.putString("userName", it.UserName)

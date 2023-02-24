@@ -19,13 +19,13 @@ class LoginlViewModel :ViewModel() {
     private val loginService = LoginRetrofitClient.getService_Login()
     var state= MutableLiveData<LOGIN>()
 
-    fun refresh(email: String,pw: String){
-        tryLogin(email,pw)
+    fun refresh(id: String,pw: String){
+        tryLogin(id,pw)
     }
-    private fun tryLogin(email: String,pw: String){
+    private fun tryLogin(id: String,pw: String){
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val call = loginService.getLogin(email,pw)
+            val call = loginService.getLogin(id,pw)
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     state.postValue(call.body())

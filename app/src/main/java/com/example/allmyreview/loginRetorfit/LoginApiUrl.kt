@@ -15,7 +15,7 @@ interface LoginApiInterface{
     @FormUrlEncoded
     @POST(loginApiUrl.EndPoint)
     suspend fun getLogin(
-        @Field("UserEmail") UserEmail : String?,
+        @Field("UserID") UserID : String?,
         @Field("UserPwd") UserPwd : String?
     ): Response<LOGIN>
 }
