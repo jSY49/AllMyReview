@@ -9,17 +9,15 @@
 
     <ScrollView
         android:id="@+id/scrollview"
-        android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
         tools:ignore="ScrollViewCount">
-
-
 
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/userButton"
@@ -27,20 +25,19 @@
                 android:layout_height="50dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/baseline_account_circle_24"
                 android:backgroundTint="@color/purpleBlue" />
 
             <RelativeLayout
-                android:layout_below="@+id/userButton"
                 android:id="@+id/layout_pop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/userButton"
                 android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                >
+                android:layout_marginEnd="16dp">
 
                 <TextView
                     android:id="@+id/text_popularMoview"
@@ -64,11 +61,11 @@
                 android:id="@+id/layout_new"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_pop"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp"
-                android:layout_below="@+id/layout_pop">
+                android:layout_marginBottom="30dp">
 
                 <TextView
                     android:id="@+id/text_newMovie"

@@ -1,14 +1,15 @@
 package com.example.allmyreview.ui.home
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.app.Activity
+import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,6 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allmyreview.MyMovieAdapter
 import com.example.allmyreview.MyNewMovieAdapter
 import com.example.allmyreview.databinding.FragmentHomeBinding
+import com.example.allmyreview.login.LoginActivity
+import com.example.allmyreview.login.SignUpActivity
+import com.example.allmyreview.users.UserActivity
 
 
 class HomeFragment : Fragment() {
@@ -29,6 +33,11 @@ class HomeFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    lateinit var auto : SharedPreferences
+    var userEmail : String?= null
+    var userName : String? = null
+
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +46,11 @@ class HomeFragment : Fragment() {
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        auto = this.requireActivity().getSharedPreferences("autoLogin", Activity.MODE_PRIVATE)
+        userEmail = auto.getString("userEmail", null)
+        userName = auto.getString("userName", null)
+
 
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         homeViewModel.refresh("pop")
@@ -58,6 +72,20 @@ class HomeFragment : Fragment() {
             adapter = myMovieAdpater2
         }
         observeViewModel2()
+
+
+        binding.userButton.setOnClickListener {
+            Log.d(TAG,"userEmail ${userEmail}, userName ${userName}")
+            if(userEmail!=null&&userName!=null){
+                val intent = Intent(context, UserActivity::class.java)
+                startActivity(intent)
+            }else{
+                val intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+
+        }
+
 
         return root
     }
@@ -125,4 +153,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    override fun onResume() {
+        userEmail = auto.getString("userEmail", null)
+        userName = auto.getString("userName", null)
+        super.onResume()
+    }
 }

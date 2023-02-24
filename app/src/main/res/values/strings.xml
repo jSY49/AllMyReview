@@ -23,9 +23,9 @@
     <string name="cancel">취소</string>
     <string name="signUp">회원 가입</string>
     <string name="LogIn">로그인</string>
-    <string name="emailcheck">이메일 확인을 진행해주세요</string>
-
-
+    <string name="emailcheck">이메일 확인을 진행해주세요.</string>
+    <string name="LoginFailed">이메일 혹은 비밀번호를 확인해주세요.</string>
+    <string name="Logout">로그아웃</string>
 
 
 </resources>
