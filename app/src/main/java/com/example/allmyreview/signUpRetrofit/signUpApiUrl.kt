@@ -11,7 +11,6 @@ class signUpiUrl{
     companion object{
         const val EndPoint ="Register.php"
         const val EndPoint_checkEmail ="UserValidate.php"
-        const val EndPoint_createTable ="createTable.php"
     }
 }
 

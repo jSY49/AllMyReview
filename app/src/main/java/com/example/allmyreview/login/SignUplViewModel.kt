@@ -18,7 +18,6 @@ class SignUplViewModel :ViewModel() {
     private val IdCheckService = signUpRetrofitClient.getRtService_chckId()
     var state= MutableLiveData<Boolean>()
     var idCheck= MutableLiveData<Boolean>()
-    var createTable= MutableLiveData<Boolean>()
 
     fun refresh(id: String,  name: String, pw: String, email: String){
         trySignIn(id,name,pw,email)

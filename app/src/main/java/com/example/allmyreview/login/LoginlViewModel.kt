@@ -1,6 +1,7 @@
 package com.example.allmyreview.login
 
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.allmyreview.ReviewDb
