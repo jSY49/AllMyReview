@@ -49,7 +49,7 @@ class DetailViewModel :ViewModel() {
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     review.postValue(response.body())
-                    Log.d(TAG,review.value.toString())
+                    Log.d(TAG, response.body().toString())
                 } else {
                     Log.e(TAG, "Error: ${response.message()}")
 

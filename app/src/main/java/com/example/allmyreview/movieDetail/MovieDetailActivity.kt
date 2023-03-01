@@ -25,18 +25,21 @@ class MovieDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMovieDetailBinding
     private lateinit var detailViewModel: DetailViewModel
     private var id = 0
+    private var userid = ""
     private var MovieName = ""
     var reviewCheck=false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMovieDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val auto: SharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE)
-        val userid =auto.getString("userID", null)
+        userid = auto.getString("userID", null).toString()
         id = intent.getIntExtra("movieId", 0)
         detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
         detailViewModel.refresh(id,userid)
         observeViewModel()
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -73,7 +76,7 @@ class MovieDetailActivity : AppCompatActivity() {
                 val reviewData = detailViewModel.review.value
                 if (reviewData != null) {
                     reviewCheck=true
-                    binding.reviewText.text=reviewData.Review.get(0).overview
+                    binding.reviewText.text= reviewData.Review[0].overview
                     binding.gotowriteBtn.visibility=View.GONE
                 }
             }
@@ -96,7 +99,14 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     fun gotoDetailReview(view: View) {
-
+        if(reviewCheck){
+            val intent = Intent(this, DetailReviewActivity::class.java)
+            val url = "https://image.tmdb.org/t/p/original" + detailViewModel.data.value!!.backdrop_path
+            intent.putExtra("img", url)
+            intent.putExtra("movieId", id)
+            intent.putExtra("movieNm", MovieName)
+            startActivity(intent)
+        }
     }
 
 }
