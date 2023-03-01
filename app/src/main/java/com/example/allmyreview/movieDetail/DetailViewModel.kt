@@ -1,5 +1,7 @@
 package com.example.allmyreview.movieDetail
 
+import android.app.Activity
+import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,9 +23,10 @@ class DetailViewModel :ViewModel() {
     var data = MutableLiveData<DetailMovie>()
     var review = MutableLiveData<ReviewDb>()
 
-    fun refresh(id : Int) {
+
+    fun refresh(id : Int,userId: String?) {
         getMovieDetail(id)
-        getReview(id)
+        getReview(id,userId)
     }
     private fun getMovieDetail(id: Int) {
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
@@ -39,9 +42,9 @@ class DetailViewModel :ViewModel() {
         }
     }
 
-    private fun getReview(code: Int) {
+    private fun getReview(code: Int,userId: String?) {
         CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val response = ReviewService.getReview(code)
+            val response = ReviewService.getReview(code,userId)
             Log.d(TAG, response.raw().toString())
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {

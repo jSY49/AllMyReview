@@ -1,24 +1,36 @@
 package com.example.allmyreview
 
 
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
-class reviewApiUrl{
+class reviewApiUrl {
 
-    companion object{
-        //const val EndPoint ="myReviewJson.php"
-        const val EndPoint ="getReview.php"
+    companion object {
+        const val EndPoint = "getReview.php"
+        const val EndPoint_add = "addReview.php"
     }
 
 }
 
-interface ApiInterface{
-    @GET(reviewApiUrl. EndPoint)
+interface ApiInterface {
+    @FormUrlEncoded
+    @POST(reviewApiUrl.EndPoint)
     suspend fun getReview(
-        @Query("movieCode") movieCode :Int
+        @Field("movieCode") movieCode: Int,
+        @Field("UserID") UserID: String?
     ): Response<ReviewDb>
 
-
+    @FormUrlEncoded
+    @POST(reviewApiUrl.EndPoint_add)
+    suspend fun addReview(
+        @Field("reviewId") reviewId : String?,
+        @Field("UserID") UserID : String?,
+        @Field("movieCode") movieCode : Int?,
+        @Field("place") place : String?,
+        @Field("overview") overview : String?,
+        @Field("date") date : String?,
+    ): Response<AddReview>
 }
+
+

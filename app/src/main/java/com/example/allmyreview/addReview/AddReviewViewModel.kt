@@ -1,9 +1,10 @@
 package com.example.allmyreview.addReview
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -11,10 +12,29 @@ import java.util.*
 class AddReviewViewModel :ViewModel() {
 
     val TAG="AddReviewViewModel"
-    var job: Job? = null
-    var date = getdate()
-    fun add(id: Int, overview: String, place: String, applicationContext: Context) {
+    val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e(TAG, "Exception: ${throwable.localizedMessage}")
+    }
+    var state= MutableLiveData<Boolean>()
+    private val reviewService = ReviewRetrofitClient.getRetrofitService()
 
+    fun refresh(reviewId :String,UserID:String, movieCode: Int, place:String, overview:String, date:String){
+        add(reviewId,UserID,movieCode,place,overview,date)
+
+    }
+    fun add(reviewId:String,UserID:String, movieCode: Int, place:String, overview:String, date:String) {
+        CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+            val call = reviewService.addReview(reviewId,UserID,movieCode,place,overview,date)
+            withContext(Dispatchers.Main) {
+                if (call.isSuccessful) {
+                    state.postValue(call.body()!!.success)
+                    Log.e(TAG, "add reveiw call is Successed : ${call.body()}")
+                } else {
+                    state.postValue(false)
+                    Log.e(TAG, "add reveiw Failed : ${call.raw()}")
+                }
+            }
+        }
     }
 
 
@@ -24,7 +44,6 @@ class AddReviewViewModel :ViewModel() {
         val SDF: SimpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
         SDF.timeZone = TimeZone.getTimeZone("Asia/Seoul")
         val res = SDF.format(calendar.time)
-        Log.d(TAG,res)
         return res
     }
 
