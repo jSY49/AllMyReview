@@ -40,9 +40,14 @@ class MovieDetailActivity : AppCompatActivity() {
         detailViewModel.refresh(id,userid)
 
         reviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
+
+        getReview()
+
+    }
+
+    fun getReview(){
         reviewViewModel.refresh(id,userid)
         observeViewModel()
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -112,4 +117,8 @@ class MovieDetailActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getReview()
+    }
 }
