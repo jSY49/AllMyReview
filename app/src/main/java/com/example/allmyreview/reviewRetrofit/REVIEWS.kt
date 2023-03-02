@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class ReviewDb(
+    @SerializedName("blank")val blank: Boolean,
     @SerializedName("Review") @Expose val Review: List<Review>
 )
 data class Review(
@@ -12,7 +13,6 @@ data class Review(
     @SerializedName("overview") @Expose val overview: String,
     @SerializedName("date") @Expose val date: String
 )
-
 
 data class AddReview(
     val success: Boolean,

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.AllMyReview"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".reviewDetail.DetailReviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".users.UserActivity"
             android:exported="false" />
         <activity

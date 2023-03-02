@@ -35,8 +35,8 @@ class DetailReviewActivity : AppCompatActivity() {
     fun observe(movieNm: String?, url: String?) {
         detailReviewViewModel.review.observe(this, Observer {
             it.let {
-                val reviewData = detailReviewViewModel.review.value
-                if (reviewData != null) {
+                val reviewData = detailReviewViewModel.review.value!!.blank
+                if (!reviewData) {
                     Glide.with(this).load(url)
                         .placeholder(R.drawable.ic_launcher_foreground)
                         .centerCrop()

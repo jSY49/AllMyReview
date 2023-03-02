@@ -6,9 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -17,13 +15,15 @@ import com.example.allmyreview.R
 import com.example.allmyreview.addReview.AddReviewActivity
 import com.example.allmyreview.databinding.ActivityMovieDetailBinding
 import com.example.allmyreview.reviewDetail.DetailReviewActivity
+import com.example.allmyreview.reviewDetail.DetailReviewViewModel
 import kotlinx.coroutines.*
 
 class MovieDetailActivity : AppCompatActivity() {
 
     private val TAG = "MovieDetailActivity"
     private lateinit var binding: ActivityMovieDetailBinding
-    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var detailViewModel: MovieDetailViewModel
+    private lateinit var reviewViewModel: DetailReviewViewModel
     private var id = 0
     private var userid = ""
     private var MovieName = ""
@@ -36,8 +36,11 @@ class MovieDetailActivity : AppCompatActivity() {
         val auto: SharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE)
         userid = auto.getString("userID", null).toString()
         id = intent.getIntExtra("movieId", 0)
-        detailViewModel = ViewModelProvider(this)[DetailViewModel::class.java]
+        detailViewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
         detailViewModel.refresh(id,userid)
+
+        reviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
+        reviewViewModel.refresh(id,userid)
         observeViewModel()
 
     }
@@ -71,12 +74,12 @@ class MovieDetailActivity : AppCompatActivity() {
 
         })
 
-        detailViewModel.review.observe(this,Observer{
+        reviewViewModel.review.observe(this,Observer{
             it?.let {
-                val reviewData = detailViewModel.review.value
-                if (reviewData != null) {
+                val reviewData = reviewViewModel.review.value!!.blank
+                if (!reviewData) {
                     reviewCheck=true
-                    binding.reviewText.text= reviewData.Review[0].overview
+                    binding.reviewText.text= it.Review[0].overview
                     binding.gotowriteBtn.visibility=View.GONE
                 }
             }
