@@ -9,6 +9,7 @@ class reviewApiUrl {
     companion object {
         const val EndPoint = "getReview.php"
         const val EndPoint_add = "addReview.php"
+        const val EndPoint_update = "updateReview.php"
     }
 
 }
@@ -27,6 +28,15 @@ interface ApiInterface {
         @Field("reviewId") reviewId : String?,
         @Field("UserID") UserID : String?,
         @Field("movieCode") movieCode : Int?,
+        @Field("place") place : String?,
+        @Field("overview") overview : String?,
+        @Field("date") date : String?,
+    ): Response<AddReview>
+
+    @FormUrlEncoded
+    @POST(reviewApiUrl.EndPoint_update)
+    suspend fun updateReview(
+        @Field("reviewId") reviewId : String?,
         @Field("place") place : String?,
         @Field("overview") overview : String?,
         @Field("date") date : String?,
