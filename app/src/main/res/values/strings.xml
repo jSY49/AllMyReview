@@ -27,6 +27,11 @@
     <string name="idcheck">아이디 확인을 진행해주세요.</string>
     <string name="LoginFailed">이메일 혹은 비밀번호를 확인해주세요.</string>
     <string name="Logout">로그아웃</string>
+    <string name="upadte">수정</string>
+    <string name="delete">삭제</string>
+
+
+
 
 
 </resources>

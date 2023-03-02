@@ -10,6 +10,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.bumptech.glide.disklrucache.DiskLruCache.Value
 import com.example.allmyreview.Genres
 import com.example.allmyreview.R
 import com.example.allmyreview.addReview.AddReviewActivity
@@ -86,6 +87,9 @@ class MovieDetailActivity : AppCompatActivity() {
                     reviewCheck=true
                     binding.reviewText.text= it.Review[0].overview
                     binding.gotowriteBtn.visibility=View.GONE
+                }else{
+                    binding.reviewText.text=getString(R.string.reviewIsNone)
+                    binding.gotowriteBtn.visibility=View.VISIBLE
                 }
             }
         })

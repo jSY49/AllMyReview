@@ -1,12 +1,14 @@
 package com.example.allmyreview.reviewDetail
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -14,10 +16,13 @@ import com.example.allmyreview.R
 import com.example.allmyreview.databinding.ActivityDetailReviewBinding
 import com.example.allmyreview.updateReview.updateReviewActivity
 
+
 class DetailReviewActivity : AppCompatActivity() {
     val TAG = "DetailReviewActivity"
     private lateinit var binding: ActivityDetailReviewBinding
     private lateinit var detailReviewViewModel: DetailReviewViewModel
+    private lateinit var deleteReviewViewModel: DeleteReviewViewModel
+
     var movieId =0
     var userid =""
     var movieNm =""
@@ -29,7 +34,7 @@ class DetailReviewActivity : AppCompatActivity() {
         binding = ActivityDetailReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
         detailReviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
-
+        deleteReviewViewModel = ViewModelProvider(this)[DeleteReviewViewModel::class.java]
         url= intent.getStringExtra("img").toString()
         movieId= intent.getIntExtra("movieId", 0)
         movieNm= intent.getStringExtra("movieNm").toString()
@@ -75,7 +80,25 @@ class DetailReviewActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun deleteBtn(view: View) {
+        val dlg = AlertDialog.Builder(this@DetailReviewActivity)
+        dlg.setTitle("내 리뷰를 삭제?!")
+        dlg.setMessage("정말 리뷰를 삭제하시겠습까..?")
+        dlg.setPositiveButton("확인") { dialog, which ->
+            deleteReviewViewModel.refresh(userid+movieId)
+            observeDelete()
+        }
+        dlg.show()
+    }
 
+    private fun observeDelete() {
+        deleteReviewViewModel.state.observe(this, Observer {
+            if(it){
+                Toast.makeText(this,"삭제되었습니다.",Toast.LENGTH_SHORT).show()
+                finish()
+            }else{
+                Toast.makeText(this,"삭제되지 않았습니다.\n다시 시도해주세요.",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onResume() {

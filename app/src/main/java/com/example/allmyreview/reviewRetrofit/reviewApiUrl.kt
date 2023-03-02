@@ -10,6 +10,7 @@ class reviewApiUrl {
         const val EndPoint = "getReview.php"
         const val EndPoint_add = "addReview.php"
         const val EndPoint_update = "updateReview.php"
+        const val EndPoint_delete = "deleteReview.php"
     }
 
 }
@@ -40,6 +41,12 @@ interface ApiInterface {
         @Field("place") place : String?,
         @Field("overview") overview : String?,
         @Field("date") date : String?,
+    ): Response<AddReview>
+
+    @FormUrlEncoded
+    @POST(reviewApiUrl.EndPoint_delete)
+    suspend fun deleteReview(
+        @Field("reviewId") reviewId : String?,
     ): Response<AddReview>
 }
 
