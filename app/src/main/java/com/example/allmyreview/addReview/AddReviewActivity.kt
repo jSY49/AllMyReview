@@ -12,7 +12,7 @@ import com.example.allmyreview.databinding.ActivityAddReviewBinding
 
 class AddReviewActivity : AppCompatActivity() {
 
-    final val TAG="AddReviewActivity"
+    val TAG="AddReviewActivity"
     private lateinit var binding: ActivityAddReviewBinding
     private var id= 0
     private var movieNm=""
@@ -62,5 +62,6 @@ class AddReviewActivity : AppCompatActivity() {
         }
 
     }
+
 
 }
