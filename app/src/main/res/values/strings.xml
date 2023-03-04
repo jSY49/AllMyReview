@@ -4,16 +4,19 @@
     <string name="title_review">Review</string>
     <string name="title_user">User</string>
 
-    <string name="popular_movie">인기 영화</string>
-    <string name="new_movie">최신 영화</string>
+    <string name="popular_movie">Top 인기 영화</string>
+    <string name="new_movie">Top 최신 영화</string>
     <string name="releaseDateText">개봉일</string>
     <string name="genresText">장르</string>
     <string name="runTimeText">상영시간</string>
+
     <string name="reviewIsNone">작성된 리뷰가 없어요:\'(</string>
     <string name="addReview">리뷰 작성 하러 가기</string>
     <string name="writeReview">리뷰를 작성해 주세요..</string>
     <string name="writePlace">시청 장소를 작성해 주세요..</string>
     <string name="addReviewtoDb">리뷰 저장하기</string>
+    <string name="MyReaview">나의 모든 리뷰</string>
+    <string name="pleaseLogin">로그인 후 리뷰를 확인해 주세요</string>
 
     <string name="UserName">이름</string>
     <string name="UserId">아이디</string>

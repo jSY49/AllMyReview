@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
 import com.example.allmyreview.databinding.RecyclerMovieBinding
 import com.example.allmyreview.movieDetail.MovieDetailActivity
 
@@ -33,6 +35,7 @@ class MyNewMovieAdapter(private var data: ArrayList<MovieResult2>) :
             Glide.with(itemView).load(url)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .fitCenter()
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
                 .into(binding.imageView)
 //            binding.executePendingBindings() //데이터가 수정되면 즉각 반영
 
