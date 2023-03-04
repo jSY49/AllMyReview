@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.allmyreview.R
 import com.example.allmyreview.databinding.ActivityDetailReviewBinding
+import com.example.allmyreview.movieDetail.MovieDetailViewModel
 import com.example.allmyreview.updateReview.updateReviewActivity
 
 
@@ -35,14 +36,28 @@ class DetailReviewActivity : AppCompatActivity() {
         setContentView(binding.root)
         detailReviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
         deleteReviewViewModel = ViewModelProvider(this)[DeleteReviewViewModel::class.java]
-        url= intent.getStringExtra("img").toString()
         movieId= intent.getIntExtra("movieId", 0)
-        movieNm= intent.getStringExtra("movieNm").toString()
+
         val auto: SharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE)
         userid = auto.getString("userID", null).toString()
 
-        getReview()
+        observeMData()
 
+    }
+    fun observeMData(){
+        var detailViewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
+        detailViewModel.refresh(movieId)
+        detailViewModel.data.observe(this, Observer {
+            it?.let {
+                url ="https://image.tmdb.org/t/p/original"+it.backdrop_path
+                Glide.with(this).load(url)
+                    .placeholder(R.drawable.ic_launcher_foreground)
+                    .centerCrop()
+                    .into(binding.movieImageView)
+                movieNm=it.title
+                getReview()
+            }
+        })
     }
     fun getReview(){
         detailReviewViewModel.refresh(movieId,userid)

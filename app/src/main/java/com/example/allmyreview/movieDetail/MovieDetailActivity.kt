@@ -7,6 +7,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -38,7 +39,7 @@ class MovieDetailActivity : AppCompatActivity() {
         userid = auto.getString("userID", null).toString()
         id = intent.getIntExtra("movieId", 0)
         detailViewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
-        detailViewModel.refresh(id,userid)
+        detailViewModel.refresh(id)
 
         reviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
 
@@ -104,19 +105,25 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     fun addReviewBtn(view: View) {
-        val intent = Intent(this, AddReviewActivity::class.java)
-        intent.putExtra("movieId", id)
-        intent.putExtra("movieName", MovieName)
-        startActivity(intent)
+        val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
+        if(!auto.getString("userID",null).isNullOrBlank()){
+            val intent = Intent(this, AddReviewActivity::class.java)
+            intent.putExtra("movieId", id)
+            intent.putExtra("movieName", MovieName)
+            startActivity(intent)
+        }else{
+            Toast.makeText(this,"로그인 후 작성할 수 있습니다.",Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     fun gotoDetailReview(view: View) {
         if(reviewCheck){
             val intent = Intent(this, DetailReviewActivity::class.java)
             val url = "https://image.tmdb.org/t/p/original" + detailViewModel.data.value!!.backdrop_path
-            intent.putExtra("img", url)
+            //intent.putExtra("img", url)
             intent.putExtra("movieId", id)
-            intent.putExtra("movieNm", MovieName)
+            //intent.putExtra("movieNm", MovieName)
             startActivity(intent)
         }
     }

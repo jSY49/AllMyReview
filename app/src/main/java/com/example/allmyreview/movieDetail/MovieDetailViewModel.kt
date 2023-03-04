@@ -20,7 +20,7 @@ class MovieDetailViewModel :ViewModel() {
     var data = MutableLiveData<DetailMovie>()
 
 
-    fun refresh(id : Int,userId: String?) {
+    fun refresh(id : Int) {
         getMovieDetail(id)
     }
     private fun getMovieDetail(id: Int) {

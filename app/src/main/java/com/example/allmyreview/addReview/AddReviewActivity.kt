@@ -46,7 +46,7 @@ class AddReviewActivity : AppCompatActivity() {
 
         if(review!=""&&place!=""){
             if (userid != null) {
-                addReviewViewModel.refresh(userid+id,userid,id,place, review,date)
+                addReviewViewModel.refresh(userid+id,userid,id,movieNm,place, review,date)
                 addReviewViewModel.state.observe(this, Observer {
                     if(it)
                         finish()

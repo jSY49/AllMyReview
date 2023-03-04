@@ -9,6 +9,7 @@ data class ReviewDb(
 )
 data class Review(
     @SerializedName("movieCode") @Expose val Moviecode: Int,
+    @SerializedName("movieNm") @Expose val movieNm: String,
     @SerializedName("place") @Expose val place: String,
     @SerializedName("overview") @Expose val overview: String,
     @SerializedName("date") @Expose val date: String
