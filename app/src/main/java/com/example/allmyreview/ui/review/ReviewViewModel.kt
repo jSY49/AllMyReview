@@ -48,7 +48,7 @@ class ReviewViewModel : ViewModel() {
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     data.postValue(call.body()!!.Review)
-                    Log.e(TAG, "getReview call is Successed : ${call.body()}")
+                    Log.d(TAG, "getReview call is Successed : ${call.raw()}")
                 } else {
                     Log.e(TAG, "getReview call Failed : ${call.raw()}")
                 }

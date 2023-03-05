@@ -20,6 +20,7 @@ import com.example.allmyreview.MyNewMovieAdapter
 import com.example.allmyreview.databinding.FragmentHomeBinding
 import com.example.allmyreview.login.LoginActivity
 import com.example.allmyreview.login.SignUpActivity
+import com.example.allmyreview.search.SearchActivity
 import com.example.allmyreview.users.UserActivity
 
 
@@ -86,6 +87,10 @@ class HomeFragment : Fragment() {
 
         }
 
+        binding.serachTextview.setOnClickListener {
+            val intent = Intent(context, SearchActivity::class.java)
+            startActivity(intent)
+        }
 
         return root
     }

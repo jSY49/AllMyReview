@@ -13,6 +13,7 @@ class apiUrl{
         const val trendingMovie_EndPoint ="trending/movie/week"
         const val newMovie_EndPoint ="movie/upcoming"
         const val DetailMovie_EndPoint ="movie/"
+        const val SearchMovie_EndPoint ="search/movie"
         const val TMDB_API_KEY = BuildConfig.TMDB_API
 
     }
@@ -27,6 +28,17 @@ interface ApiUrlInterface{
         @Query("language")
         language:String = "ko-KR",
     ): Response<MovieDb>
+
+    @GET(apiUrl. SearchMovie_EndPoint)
+    suspend fun searchMovie(
+        @Query("query")
+        query:String,
+        @Query("api_key")
+        key:String = apiUrl.TMDB_API_KEY,
+        @Query("language")
+        language:String = "ko-KR"
+    ): Response<MovieDb>
+
 }
 interface new_ApiUrlInterface{
     @GET(apiUrl. newMovie_EndPoint)
