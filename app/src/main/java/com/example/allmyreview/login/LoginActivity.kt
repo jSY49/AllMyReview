@@ -9,12 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.allmyreview.R
 import com.example.allmyreview.databinding.ActivityLoginBinding
+import com.example.allmyreview.users.UserViewModel
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginlViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         loginViewModel = ViewModelProvider(this)[LoginlViewModel::class.java]
+        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
 
     }
@@ -40,14 +43,7 @@ class LoginActivity : AppCompatActivity() {
         loginViewModel.state.observe(this, Observer{
             it.let {
                 if(it.UserID!=null){
-                    val auto = getSharedPreferences("autoLogin", MODE_PRIVATE)
-                    val autoLoginEdit = auto.edit()
-                    autoLoginEdit.putString("userID", it.UserID)
-                    autoLoginEdit.putString("userEmail", it.UserEmail)
-                    autoLoginEdit.putString("password", it.UserPwd)
-                    autoLoginEdit.putString("userName", it.UserName)
-                    autoLoginEdit.apply()
-
+                    userViewModel.addInfo(this,it.UserID,it.UserEmail , it.UserName,it.UserPwd)
                     Toast.makeText(this,"로그인 성공!",Toast.LENGTH_SHORT).show()
                     finish()
                 }else{
