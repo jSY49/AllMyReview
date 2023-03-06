@@ -16,13 +16,16 @@
 ✔ 사용자 회원가입 : PHP, MySql (웹서버는 닷홈 호스팅)<br/>
 📌 영화 조회 : The Movie Database pi 사용<br/>
 
+<table border="1">
+<th>[회원가입]</th>
+<th>[리뷰 추가/수정/삭제]</th>
+<th>[영화 검색]</th>
+	<tr><!-- 첫번째 줄 시작 -->
+	    <td><img width="100%" src="https://user-images.githubusercontent.com/96411866/222940984-c7af1cff-7f3a-42e9-a623-0e00c7ba2409.gif"/></td>
+	    <td><img width="100%" src="https://user-images.githubusercontent.com/96411866/222940982-41a66fcd-3ad8-44cf-9be2-478b46d4a282.gif"/></td>
+      <td><img width="100%" src="https://user-images.githubusercontent.com/96411866/222940985-ec83ac16-24bf-4aea-ba1b-d2d5a35a1045.gif"/></td>
+	</tr><!-- 첫번째 줄 끝 -->
+</table>
 
-##### [회원가입]
-<img width="30%" src="https://user-images.githubusercontent.com/96411866/222940984-c7af1cff-7f3a-42e9-a623-0e00c7ba2409.gif"/>
 
-##### [리뷰 추가/수정/삭제]
-<img width="30%" src="https://user-images.githubusercontent.com/96411866/222940982-41a66fcd-3ad8-44cf-9be2-478b46d4a282.gif"/>
-
-##### [영화 검색]
-<img width="30%" src="https://user-images.githubusercontent.com/96411866/222940985-ec83ac16-24bf-4aea-ba1b-d2d5a35a1045.gif"/>
 
