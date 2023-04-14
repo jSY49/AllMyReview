@@ -3,11 +3,10 @@ package com.example.allmyreview
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
-import android.view.RoundedCorner
 import android.view.ViewGroup
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.allmyreview.databinding.RecyclerMovieBinding

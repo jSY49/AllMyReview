@@ -12,6 +12,7 @@
 
     <string name="reviewIsNone">작성된 리뷰가 없어요:\'(</string>
     <string name="addReview">리뷰 작성 하러 가기</string>
+    <string name="wouldaddReview">리뷰 작성 하러 가볼까요?</string>
     <string name="writeReview">리뷰를 작성해 주세요..</string>
     <string name="writePlace">시청 장소를 작성해 주세요..</string>
     <string name="addReviewtoDb">리뷰 저장하기</string>

@@ -3,10 +3,11 @@ package com.example.allmyreview.search
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.paging.PagingData
 import com.example.allmyreview.MovieResult
-import com.example.allmyreview.MovieResult2
 import com.example.allmyreview.MovieRetrofit.RetrofitClient
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
 
 class SearchViewModel : ViewModel() {
 
@@ -17,6 +18,7 @@ class SearchViewModel : ViewModel() {
         onError("Exception: ${throwable.localizedMessage}")
     }
     var data = MutableLiveData<List<MovieResult>>()
+    var cnt = MutableLiveData<String>()
     val movieLoadError = MutableLiveData<String?>()
     val loading = MutableLiveData<Boolean>()
 
@@ -32,8 +34,10 @@ class SearchViewModel : ViewModel() {
 //            var response = movieService.getMovie()
             withContext(Dispatchers.Main) {
                 Log.d(TAG, "${keyword}:" + response.raw().toString())
+                Log.d("SearchViewModel","getMovieData() called")
                 if (response.isSuccessful) {
                     data.postValue(response.body()?.results)
+                    cnt.postValue(response.body()?.total_results.toString())
                     movieLoadError.postValue(null)
                     loading.postValue(false)
 
@@ -41,11 +45,8 @@ class SearchViewModel : ViewModel() {
                     onError("Error: ${response.message()}")
                     // Log.d(TAG, "Movie failed")
                 }
-
-
             }
         }
-
 
     }
 

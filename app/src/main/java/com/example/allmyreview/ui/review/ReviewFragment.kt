@@ -71,10 +71,20 @@ class ReviewFragment : Fragment() {
     fun observReview(){
         reviewViewModel.data.observe(viewLifecycleOwner, Observer {
             it?.let {
+                if(it.isEmpty()){
+                    binding.textReviewNone.visibility=View.VISIBLE
+                }else{
+                    binding.textReviewNone.visibility=View.GONE
+                }
                 myReviewAdapter.updateReview(it)
                 myReviewAdapter.notifyDataSetChanged()
             }
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        reviewViewModel.setId()
+        observReview()
+    }
 }
