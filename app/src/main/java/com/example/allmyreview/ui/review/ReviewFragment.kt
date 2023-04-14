@@ -85,6 +85,6 @@ class ReviewFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         reviewViewModel.setId()
-        observReview()
+        observeLogin()
     }
 }

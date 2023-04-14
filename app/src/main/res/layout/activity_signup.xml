@@ -10,10 +10,10 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
         android:text="@string/signUp"
         android:textSize="30sp"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,6 +26,7 @@
         android:ems="10"
         android:hint="@string/UserName"
         android:inputType="textPersonName"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -37,6 +38,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/UserId"
+        android:inputType="text"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/join_name"
         app:layout_constraintTop_toBottomOf="@+id/join_name" />
 
@@ -48,6 +51,7 @@
         android:ems="10"
         android:hint="@string/UserEmail"
         android:inputType="textEmailAddress"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/idRes"
         app:layout_constraintTop_toBottomOf="@+id/idRes" />
 
@@ -75,10 +79,11 @@
         android:id="@+id/join_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/UserPassword"
         android:inputType="textPassword"
-        android:layout_marginTop="10dp"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/join_email"
         app:layout_constraintTop_toBottomOf="@+id/join_email" />
 
@@ -86,21 +91,21 @@
         android:id="@+id/join_pwck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/UserPasswordCheck"
         android:inputType="textPassword"
-        android:layout_marginTop="10dp"
+        android:maxLines="1"
         app:layout_constraintStart_toStartOf="@+id/join_password"
         app:layout_constraintTop_toBottomOf="@+id/join_password" />
-
 
 
     <Button
         android:id="@+id/join_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/signUp"
         android:layout_marginTop="10dp"
+        android:text="@string/signUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/join_pwck" />

@@ -3,11 +3,9 @@ package com.example.allmyreview.search
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.PagingData
 import com.example.allmyreview.MovieResult
 import com.example.allmyreview.MovieRetrofit.RetrofitClient
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
 
 class SearchViewModel : ViewModel() {
 
