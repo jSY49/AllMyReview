@@ -17,25 +17,28 @@ class SearchViewModel : ViewModel() {
     }
     var data = MutableLiveData<List<MovieResult>>()
     var cnt = MutableLiveData<String>()
+    var totalPage = MutableLiveData<Int>()
+
     val movieLoadError = MutableLiveData<String?>()
     val loading = MutableLiveData<Boolean>()
 
-    fun refresh(keyword: String) {
-        getMovieData(keyword)
+    fun refresh(keyword: String, page: Int) {
+        getMovieData(keyword, page)
     }
 
-    private fun getMovieData(keyword: String) {
+    private fun getMovieData(keyword: String, page: Int) {
         loading.value = true
 
         job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            var response = movieService.searchMovie(keyword)
+            var response = movieService.searchMovie(keyword, page)
 //            var response = movieService.getMovie()
             withContext(Dispatchers.Main) {
                 Log.d(TAG, "${keyword}:" + response.raw().toString())
-                Log.d("SearchViewModel","getMovieData() called")
+                Log.d("SearchViewModel", "getMovieData() called")
                 if (response.isSuccessful) {
                     data.postValue(response.body()?.results)
                     cnt.postValue(response.body()?.total_results.toString())
+                    totalPage.postValue(response.body()?.total_pages)
                     movieLoadError.postValue(null)
                     loading.postValue(false)
 
@@ -45,6 +48,44 @@ class SearchViewModel : ViewModel() {
                 }
             }
         }
+
+    }
+
+    fun refresh_again(keyword: String, page: Int) {
+        getMovieData_more(keyword, page)
+    }
+    private fun getMovieData_more(keyword: String, page: Int) {
+        loading.value = true
+
+        val handler = android.os.Handler()
+
+        handler.postDelayed({
+
+
+
+        job = CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
+            var response = movieService.searchMovie(keyword, page)
+//            var response = movieService.getMovie()
+            withContext(Dispatchers.Main) {
+
+                Log.d(TAG, "${keyword}:" + response.raw().toString())
+                Log.d("SearchViewModel", "getMovieData_more() called")
+                if (response.isSuccessful) {
+                    data.postValue(response.body()?.results)
+                    cnt.postValue(response.body()?.total_results.toString())
+                    totalPage.postValue(response.body()?.total_pages)
+                    movieLoadError.postValue(null)
+                    loading.postValue(false)
+
+                } else {
+                    onError("Error: ${response.message()}")
+                    // Log.d(TAG, "Movie failed")
+                }
+
+
+            }
+        }
+        }, 1000)
 
     }
 

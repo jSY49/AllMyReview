@@ -32,6 +32,8 @@ interface ApiUrlInterface{
     suspend fun searchMovie(
         @Query("query")
         query:String,
+        @Query("page")
+        page : Int,
         @Query("api_key")
         key:String = apiUrl.TMDB_API_KEY,
         @Query("language")
