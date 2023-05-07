@@ -6,58 +6,63 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
+    <RelativeLayout
+        android:id="@+id/layoutTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/serach_Textview"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_toLeftOf="@+id/userButton"
+            android:background="@drawable/outline"
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="0dp"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="20dp"
+            android:text="@string/search" />
+
+        <ImageView
+            android:id="@+id/userButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/baseline_account_circle_24"
+            android:backgroundTint="@color/purpleBlue" />
+
+    </RelativeLayout>
+
 
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutTop"
         tools:ignore="ScrollViewCount">
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RelativeLayout
-                android:id="@+id/layoutTop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:id="@+id/serach_Textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_toLeftOf="@+id/userButton"
-                    android:background="@drawable/outline"
-                    android:drawableStart="@drawable/baseline_search_24"
-                    android:drawablePadding="0dp"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="20dp"
-                    android:text="@string/search" />
-
-                <ImageView
-                    android:id="@+id/userButton"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/baseline_account_circle_24"
-                    android:backgroundTint="@color/purpleBlue" />
-
-            </RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/layout_pop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layoutTop"
-                android:layout_marginTop="10dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp">
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/text_popularMoview"
@@ -74,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_popularMoview"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal" />
 
             </RelativeLayout>
@@ -83,11 +88,7 @@
                 android:id="@+id/layout_new"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pop"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="30dp">
+                android:layout_below="@+id/layout_pop">
 
                 <TextView
                     android:id="@+id/text_newMovie"
@@ -104,10 +105,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/text_newMovie"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:orientation="horizontal" />
             </RelativeLayout>
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
 
     <!--    <TextView

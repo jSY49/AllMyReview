@@ -30,12 +30,13 @@ class MyNewMovieAdapter(private var data: ArrayList<MovieResult2>) :
         private val context = binding.root.context
 
         fun bind(currentMovie: MovieResult2) {
+            binding.numberText.text=(position+1).toString()
             binding.nameText.text=currentMovie.title
             val url ="https://image.tmdb.org/t/p/original"+currentMovie.poster_path
             Glide.with(itemView).load(url)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .fitCenter()
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(30)))
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
                 .into(binding.imageView)
 //            binding.executePendingBindings() //데이터가 수정되면 즉각 반영
 
