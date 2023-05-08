@@ -1,14 +1,17 @@
 package com.example.allmyreview.addReview
 
 import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.allmyreview.databinding.ActivityAddReviewBinding
+
 
 class AddReviewActivity : AppCompatActivity() {
 
@@ -43,10 +46,11 @@ class AddReviewActivity : AppCompatActivity() {
         val review=binding.reviewEditText.text.toString()
         val place=binding.placeEditText.text.toString()
         val date = addReviewViewModel.getdate()
+        var star = binding.ratingBar.rating
 
         if(review!=""&&place!=""){
             if (userid != null) {
-                addReviewViewModel.refresh(userid+id,userid,id,movieNm,place, review,date)
+                addReviewViewModel.refresh(userid+id,userid,id,movieNm,star,place,review,date)
                 addReviewViewModel.state.observe(this, Observer {
                     if(it)
                         finish()
@@ -60,7 +64,6 @@ class AddReviewActivity : AppCompatActivity() {
         }else{
             Toast.makeText(this,"내용을 모두 입력해 주세요",Toast.LENGTH_LONG).show()
         }
-
     }
 
 

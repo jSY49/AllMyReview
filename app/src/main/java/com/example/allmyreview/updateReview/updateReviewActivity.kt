@@ -18,6 +18,7 @@ class updateReviewActivity : AppCompatActivity() {
     var userid = ""
     var movieNm = ""
     var place = ""
+    var star = 0.0f
     var allReview = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,8 +31,9 @@ class updateReviewActivity : AppCompatActivity() {
         movieId = intent.getIntExtra("movieId", 0)
         movieNm = intent.getStringExtra("movieNm").toString()
         place = intent.getStringExtra("place").toString()
+        star = intent.getFloatExtra("star",0.0f)
         allReview = intent.getStringExtra("review").toString()
-
+        Log.d("updateReviewActivity","onCreate() called - $star")
         ui()
 
     }
@@ -40,15 +42,17 @@ class updateReviewActivity : AppCompatActivity() {
         binding.movieNameText.setText(movieNm)
         binding.placeEditText.setText(place)
         binding.reviewEditText.setText(allReview)
+        binding.ratingBar.rating=star
     }
 
     fun addReviewBtn(view: View) {
         val review = binding.reviewEditText.text.toString()
         val p = binding.placeEditText.text.toString()
+        var s =  binding.ratingBar.rating
         Log.d(TAG, "$review , $p")
         Log.d(TAG, "${userid + movieId}")
         if (review != "" && p != "") {
-            updateReviewViewModel.refresh((userid + movieId.toString()), p, review)
+            updateReviewViewModel.refresh((userid + movieId.toString()), p, review,s)
             observe()
         }
 

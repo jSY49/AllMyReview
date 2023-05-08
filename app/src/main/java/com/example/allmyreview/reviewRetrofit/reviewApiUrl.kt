@@ -37,6 +37,7 @@ interface ApiInterface {
         @Field("UserID") UserID : String?,
         @Field("movieCode") movieCode : Int?,
         @Field("movieNm") movieNm : String?,
+        @Field("star") star : Float?,
         @Field("place") place : String?,
         @Field("overview") overview : String?,
         @Field("date") date : String?,
@@ -49,6 +50,7 @@ interface ApiInterface {
         @Field("place") place : String?,
         @Field("overview") overview : String?,
         @Field("date") date : String?,
+        @Field("star") star : Float?
     ): Response<AddReview>
 
     @FormUrlEncoded

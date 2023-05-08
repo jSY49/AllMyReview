@@ -7,6 +7,8 @@
     <string name="popular_movie">Top 인기 영화</string>
     <string name="new_movie">Top 최신 영화</string>
     <string name="releaseDateText">개봉일</string>
+    <string name="starText">별점</string>
+    <string name="nameText">제목</string>
     <string name="genresText">장르</string>
     <string name="runTimeText">상영시간</string>
 

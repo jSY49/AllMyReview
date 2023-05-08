@@ -28,6 +28,7 @@ class DetailReviewActivity : AppCompatActivity() {
     var userid =""
     var movieNm =""
     var place =""
+    var star =0.0f
     var allReview =""
     var url=""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -78,7 +79,9 @@ class DetailReviewActivity : AppCompatActivity() {
 
                     binding.placeTextView.text = it.Review[0].place
                     binding.reviewTextView.text = it.Review[0].overview
+                    binding.ratingBar.rating=it.Review[0].star
                     place = it.Review[0].place
+                    star = it.Review[0].star
                     allReview = it.Review[0].overview
                 }
             }
@@ -91,6 +94,7 @@ class DetailReviewActivity : AppCompatActivity() {
         intent.putExtra("userid",userid)
         intent.putExtra("movieNm",movieNm)
         intent.putExtra("place",place)
+        intent.putExtra("star",star)
         intent.putExtra("review",allReview)
         startActivity(intent)
     }

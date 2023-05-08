@@ -18,18 +18,19 @@ class UpdateReviewViewModel :ViewModel() {
     var state= MutableLiveData<Boolean>()
     private val ReviewService = ReviewRetrofitClient.getRetrofitService()
 
-    fun refresh(reviewId: String, p: String, review: String) {
-        updateReview(reviewId, p, review,getdate())
+    fun refresh(reviewId: String, p: String, review: String,star : Float) {
+        updateReview(reviewId, p, review,getdate(),star)
     }
 
     private fun updateReview(
         reviewId: String,
         p: String,
         review: String,
-        date: String
+        date: String,
+        star :Float
     ) {
         CoroutineScope(Dispatchers.IO+exceptionHandler).launch {
-            val call = ReviewService.updateReview(reviewId, p, review,date)
+            val call = ReviewService.updateReview(reviewId, p, review,date,star)
             withContext(Dispatchers.Main){
                 if (call.isSuccessful) {
                     state.postValue(call.body()!!.success)

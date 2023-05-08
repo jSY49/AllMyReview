@@ -125,7 +125,14 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="@string/genresText" />
+                        android:text="@string/releaseDateText" />
+
+                    <TextView
+                        android:id="@+id/starTextview"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/starText" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,6 +164,17 @@
                         android:layout_margin="5dp"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/movie_star"
+                        android:drawableStart="@drawable/round_star_24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+
                 </LinearLayout>
 
 

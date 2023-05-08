@@ -19,6 +19,7 @@ import com.example.allmyreview.databinding.ActivityMovieDetailBinding
 import com.example.allmyreview.reviewDetail.DetailReviewActivity
 import com.example.allmyreview.reviewDetail.DetailReviewViewModel
 import kotlinx.coroutines.*
+import java.text.DecimalFormat
 
 class MovieDetailActivity : AppCompatActivity() {
 
@@ -76,6 +77,9 @@ class MovieDetailActivity : AppCompatActivity() {
                 binding.movieGenres.text = getGenres(detailData.value!!.genres)
                 binding.movieRunnigTime.text = detailData.value!!.runtime.toString() + "분"
 
+                val df = DecimalFormat("#.#")
+                val roundoff = df.format(detailData.value!!.vote_average) // 295.3
+                binding.movieStar.text= roundoff.toString()
                 binding.scrollview.visibility = View.VISIBLE
             }
 

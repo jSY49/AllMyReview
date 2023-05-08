@@ -18,13 +18,21 @@ class AddReviewViewModel :ViewModel() {
     var state= MutableLiveData<Boolean>()
     private val reviewService = ReviewRetrofitClient.getRetrofitService()
 
-    fun refresh(reviewId :String,UserID:String, movieCode: Int,movieNm:String, place:String, overview:String, date:String){
-        add(reviewId,UserID,movieCode,movieNm,place,overview,date)
+    fun refresh(
+        reviewId:String,
+        UserID:String, movieCode: Int,
+        movieNm:String,star: Float, place:String,
+         overview:String, date:String){
+        add(reviewId,UserID,movieCode,movieNm,place,star,overview,date)
 
     }
-    fun add(reviewId:String,UserID:String, movieCode: Int, movieNm:String,place:String, overview:String, date:String) {
+    fun add(
+        reviewId:String,
+        UserID:String, movieCode: Int, movieNm:String,
+        place:String,
+        star: Float, overview:String, date:String) {
         CoroutineScope(Dispatchers.IO + exceptionHandler).launch {
-            val call = reviewService.addReview(reviewId,UserID,movieCode,movieNm,place,overview,date)
+            val call = reviewService.addReview(reviewId,UserID,movieCode,movieNm,star,place,overview,date)
             withContext(Dispatchers.Main) {
                 if (call.isSuccessful) {
                     state.postValue(call.body()!!.success)
