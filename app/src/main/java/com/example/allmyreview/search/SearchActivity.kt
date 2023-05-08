@@ -12,14 +12,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.allmyreview.MovieDb
 import com.example.allmyreview.MovieResult
 import com.example.allmyreview.MyMovieAdapter
+import com.example.allmyreview.MyMovieSearchAdpater
 import com.example.allmyreview.databinding.ActivitySearchBinding
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding :ActivitySearchBinding
-    private var myMovieAdpater = MyMovieAdapter(arrayListOf())
+    private var myMovieAdpater = MyMovieSearchAdpater(arrayListOf())
     private lateinit var searchViewModel: SearchViewModel
     var page =1
     var totalPage =1
@@ -32,23 +32,12 @@ class SearchActivity : AppCompatActivity() {
         binding= ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        searchViewModel=ViewModelProvider(this)[SearchViewModel::class.java]
-
         binding.searchBtn.setOnClickListener {
             page=1
             totalPage=1
+            list.clear()
             getItem()
         }
-
-      /*  binding.serachEditText.setOnEditorActionListener { v, actionId, event ->
-            var handled = false
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                binding.searchBtn.performClick()
-                getItem()
-                handled = true
-            }
-            handled
-        }*/
 
         binding.serachEditText.setOnKeyListener { v, keyCode, event ->
             if ((keyCode == KEYCODE_ENTER)) {
@@ -64,8 +53,8 @@ class SearchActivity : AppCompatActivity() {
 
     fun setRecycler(){
         binding.searchRecyclerView.apply {
-            layoutManager = GridLayoutManager(context,2).also {
-                it.orientation = GridLayoutManager.VERTICAL
+            layoutManager = LinearLayoutManager(context).also {
+                it.orientation = LinearLayoutManager.VERTICAL
             }
             adapter = myMovieAdpater
         }
@@ -89,6 +78,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun observe(){
+        searchViewModel=ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.data.observe(this, Observer {
             it?.let {
                 list.addAll(it)
@@ -118,19 +108,16 @@ class SearchActivity : AppCompatActivity() {
 
     fun getItem(){
         keyword= binding.serachEditText.text.toString()
-        if(!keyword.isNullOrBlank()){
+        if(keyword.isNotBlank()){
             setRecycler()
-            searchViewModel.refresh(keyword,page)
             observe()
+            searchViewModel.refresh(keyword,page)
             hideKeybord()
         }else{
             Toast.makeText(this,"검색어를 입력해 주세요.",Toast.LENGTH_SHORT).show()
         }
     }
     fun getItem_add(){
-
         searchViewModel.refresh_again(keyword,page)
-//        observe()
-//        hideKeybord()
     }
 }

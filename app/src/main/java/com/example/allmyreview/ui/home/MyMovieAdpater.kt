@@ -36,7 +36,7 @@ class MyMovieAdapter(private var data: ArrayList<MovieResult>) :
             Glide.with(context).load(url)
                 .placeholder(R.drawable.ic_launcher_foreground)
                 .fitCenter()
-                .apply(RequestOptions.bitmapTransform(RoundedCorners(10)))
+                .apply(RequestOptions.bitmapTransform(RoundedCorners(15)))
                 .into(binding.imageView)
 //            binding.executePendingBindings() //데이터가 수정되면 즉각 반영
 
