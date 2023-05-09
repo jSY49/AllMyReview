@@ -32,6 +32,7 @@ class SearchActivity : AppCompatActivity() {
         binding= ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        observe()
         binding.searchBtn.setOnClickListener {
             page=1
             totalPage=1
@@ -43,6 +44,9 @@ class SearchActivity : AppCompatActivity() {
             if ((keyCode == KEYCODE_ENTER)) {
                 binding.serachEditText.clearFocus()
                 binding.serachEditText.requestFocus()
+                page=1
+                totalPage=1
+                list.clear()
                 getItem()
             }
             return@setOnKeyListener false
@@ -110,7 +114,6 @@ class SearchActivity : AppCompatActivity() {
         keyword= binding.serachEditText.text.toString()
         if(keyword.isNotBlank()){
             setRecycler()
-            observe()
             searchViewModel.refresh(keyword,page)
             hideKeybord()
         }else{
@@ -120,4 +123,5 @@ class SearchActivity : AppCompatActivity() {
     fun getItem_add(){
         searchViewModel.refresh_again(keyword,page)
     }
+
 }
