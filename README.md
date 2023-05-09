@@ -22,10 +22,9 @@
 <th>[영화 검색]</th>
 	<tr><!-- 첫번째 줄 시작 -->
 	    <td><img width="100%" src="https://user-images.githubusercontent.com/96411866/222940984-c7af1cff-7f3a-42e9-a623-0e00c7ba2409.gif"/></td>
-	    <td><img width="100%" src="https://user-images.githubusercontent.com/96411866/222940982-41a66fcd-3ad8-44cf-9be2-478b46d4a282.gif"/></td>
-      <td><img width="100%" src="https://user-images.githubusercontent.com/96411866/222940985-ec83ac16-24bf-4aea-ba1b-d2d5a35a1045.gif"/></td>
+	    <td> <video muted autoplay loop src="https://user-images.githubusercontent.com/96411866/237034428-3182b9f4-d212-46a8-bb8c-3739fad6aa74.mp4" type="video/mp4"></td>
+      <td><video muted autoplay loop src="https://user-images.githubusercontent.com/96411866/237036564-6e471eeb-fdb1-4cfb-8dcf-617f8ddf3098.mov" type="video/mp4"></td>
 	</tr><!-- 첫번째 줄 끝 -->
 </table>
-
 
 
