@@ -8,15 +8,18 @@ import androidx.lifecycle.ViewModel
 import com.example.allmyreview.MovieResult
 import com.example.allmyreview.MovieResult2
 import com.example.allmyreview.MovieRetrofit.RetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import retrofit2.*
 import java.util.*
+import javax.inject.Inject
 
 @RequiresApi(Build.VERSION_CODES.O)
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor() : ViewModel() {
 
     val TAG = "HomeViewModel"
-    private val movieService = RetrofitClient.getRetrofitService()
+        private val movieService = RetrofitClient.getRetrofitService()
     private val upcomingMovieService = RetrofitClient.getRetrofitService2()
     var job: Job? = null
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
@@ -42,6 +45,7 @@ class HomeViewModel : ViewModel() {
                     var response = movieService.getMovie()
                     withContext(Dispatchers.Main) {
                         Log.d(TAG, "${want}:"+response.code().toString())
+                        Log.d("HomeViewModel",response.raw().toString())
                         if (response.isSuccessful) {
                             data.postValue(response.body()?.results)
                             //Log.d(TAG, response.body()?.results.toString())

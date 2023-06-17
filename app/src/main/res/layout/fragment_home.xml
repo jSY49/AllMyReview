@@ -60,6 +60,31 @@
             android:orientation="vertical">
 
             <RelativeLayout
+                android:id="@+id/layout_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_pop">
+
+                <TextView
+                    android:id="@+id/text_newMovie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/new_movie"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newMoview_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/text_newMovie"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal" />
+            </RelativeLayout>
+
+            <RelativeLayout
                 android:id="@+id/layout_pop"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -85,29 +110,30 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:id="@+id/layout_new"
+                android:id="@+id/layout_"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/layout_pop">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/text_newMovie"
+                    android:id="@+id/text_Moview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:text="@string/new_movie"
+                    android:text="@string/popular_movie"
                     android:textAlignment="center"
                     android:textColor="@color/black"
                     android:textSize="20sp" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newMoview_recyclerView"
+                    android:id="@+id/Movie_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/text_newMovie"
+                    android:layout_below="@id/text_Moview"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal" />
+
             </RelativeLayout>
+
         </LinearLayout>
     </ScrollView>
 

@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,17 +22,20 @@ import com.example.allmyreview.databinding.FragmentHomeBinding
 import com.example.allmyreview.login.LoginActivity
 import com.example.allmyreview.search.SearchActivity
 import com.example.allmyreview.users.UserActivity
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class HomeFragment : Fragment() {
     val TAG = "HomeFragment"
-    private lateinit var homeViewModel: HomeViewModel
-    private lateinit var homeViewModel2: HomeViewModel
+    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel2: HomeViewModel by viewModels()
+
     private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
+
     private var myMovieAdpater = MyMovieAdapter(arrayListOf())
     private var myMovieAdpater2 = MyNewMovieAdapter(arrayListOf())
-
-    private val binding get() = _binding!!
 
     lateinit var auto : SharedPreferences
     var userEmail : String?= null
@@ -52,7 +56,7 @@ class HomeFragment : Fragment() {
         userName = auto.getString("userName", null)
 
 
-        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
+//        homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         homeViewModel.refresh("pop")
         binding.popularMovieRecyclerView.apply {
             layoutManager = LinearLayoutManager(context).also {
@@ -63,7 +67,7 @@ class HomeFragment : Fragment() {
         observeViewModel()
 
 
-        homeViewModel2 = ViewModelProvider(this).get(HomeViewModel::class.java)
+//        homeViewModel2 = ViewModelProvider(this).get(HomeViewModel::class.java)
         homeViewModel2.refresh("upcoming")
         binding.newMoviewRecyclerView.apply {
             layoutManager = LinearLayoutManager(context).also {

@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.allmyreview.databinding.FragmentReviewBinding
 import com.example.allmyreview.movieDetail.MovieDetailViewModel
 import com.example.allmyreview.myReviewAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
     val TAG="ReviewFragment"
