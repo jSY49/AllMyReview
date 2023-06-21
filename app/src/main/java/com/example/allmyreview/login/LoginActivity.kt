@@ -4,27 +4,30 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.allmyreview.R
 import com.example.allmyreview.databinding.ActivityLoginBinding
 import com.example.allmyreview.users.UserViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var loginViewModel: LoginlViewModel
-    private lateinit var userViewModel: UserViewModel
+    private val loginViewModel: LoginlViewModel by viewModels()
+    private val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        loginViewModel = ViewModelProvider(this)[LoginlViewModel::class.java]
-        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
+//        loginViewModel = ViewModelProvider(this)[LoginlViewModel::class.java]
+//        userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 
 
     }

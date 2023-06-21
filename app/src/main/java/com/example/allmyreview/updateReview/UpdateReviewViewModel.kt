@@ -5,11 +5,14 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class UpdateReviewViewModel :ViewModel() {
+@HiltViewModel
+class UpdateReviewViewModel @Inject constructor()  :ViewModel() {
 
     val TAG = "updateReviewViewModel"
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->

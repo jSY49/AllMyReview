@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -18,15 +19,17 @@ import com.example.allmyreview.addReview.AddReviewActivity
 import com.example.allmyreview.databinding.ActivityMovieDetailBinding
 import com.example.allmyreview.reviewDetail.DetailReviewActivity
 import com.example.allmyreview.reviewDetail.DetailReviewViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import java.text.DecimalFormat
 
+@AndroidEntryPoint
 class MovieDetailActivity : AppCompatActivity() {
 
     private val TAG = "MovieDetailActivity"
     private lateinit var binding: ActivityMovieDetailBinding
-    private lateinit var detailViewModel: MovieDetailViewModel
-    private lateinit var reviewViewModel: DetailReviewViewModel
+    private val detailViewModel: MovieDetailViewModel by viewModels()
+    private val reviewViewModel: DetailReviewViewModel by viewModels()
     private var id = 0
     private var userid = ""
     private var MovieName = ""
@@ -39,10 +42,10 @@ class MovieDetailActivity : AppCompatActivity() {
         val auto: SharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE)
         userid = auto.getString("userID", null).toString()
         id = intent.getIntExtra("movieId", 0)
-        detailViewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
+//        detailViewModel = ViewModelProvider(this)[MovieDetailViewModel::class.java]
         detailViewModel.refresh(id)
 
-        reviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
+//        reviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
 
         getReview()
 

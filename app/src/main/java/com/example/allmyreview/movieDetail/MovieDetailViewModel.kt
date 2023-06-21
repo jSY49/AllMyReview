@@ -7,9 +7,11 @@ import com.example.allmyreview.DetailMovie
 import com.example.allmyreview.MovieRetrofit.RetrofitClient
 import com.example.allmyreview.ReviewDb
 import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-
-class MovieDetailViewModel :ViewModel() {
+import javax.inject.Inject
+@HiltViewModel
+class MovieDetailViewModel  @Inject constructor() :ViewModel() {
 
     val TAG = "DetailViewModel"
     var job: Job? = null

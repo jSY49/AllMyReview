@@ -7,26 +7,28 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.RatingBar.OnRatingBarChangeListener
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.allmyreview.databinding.ActivityAddReviewBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class AddReviewActivity : AppCompatActivity() {
 
     val TAG="AddReviewActivity"
     private lateinit var binding: ActivityAddReviewBinding
     private var id= 0
     private var movieNm=""
-    private lateinit var addReviewViewModel: AddReviewViewModel
+    private val addReviewViewModel: AddReviewViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityAddReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        addReviewViewModel = ViewModelProvider(this)[AddReviewViewModel::class.java]
+//        addReviewViewModel = ViewModelProvider(this)[AddReviewViewModel::class.java]
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
         id= intent.getIntExtra("movieId",0)

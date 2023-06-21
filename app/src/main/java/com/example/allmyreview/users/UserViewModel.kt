@@ -4,8 +4,11 @@ import android.app.Activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.allmyreview.UserData
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class UserViewModel : ViewModel() {
+@HiltViewModel
+class UserViewModel @Inject constructor() : ViewModel() {
 
     lateinit var userData: UserData
     var UserId = MutableLiveData<String>()

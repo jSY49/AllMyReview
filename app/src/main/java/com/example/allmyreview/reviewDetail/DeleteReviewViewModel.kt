@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class DeleteReviewViewModel : ViewModel() {
+@HiltViewModel
+class DeleteReviewViewModel @Inject constructor() : ViewModel() {
     val TAG = "deleteReviewViewModel"
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         Log.e(TAG, "Exception: ${throwable.localizedMessage}")

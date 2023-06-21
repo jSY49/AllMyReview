@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.example.allmyreview.MovieRetrofit.RetrofitClient
 import com.example.allmyreview.ReviewDb
 import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class DetailReviewViewModel: ViewModel() {
+@HiltViewModel
+class DetailReviewViewModel @Inject constructor(): ViewModel() {
     val TAG = "DetailReviewViewModel"
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
         Log.e(TAG, "Exception: ${throwable.localizedMessage}")

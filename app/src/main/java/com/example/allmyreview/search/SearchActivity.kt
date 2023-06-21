@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.KeyEvent.KEYCODE_ENTER
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,11 +17,13 @@ import com.example.allmyreview.MovieResult
 import com.example.allmyreview.MyMovieAdapter
 import com.example.allmyreview.MyMovieSearchAdpater
 import com.example.allmyreview.databinding.ActivitySearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding :ActivitySearchBinding
     private var myMovieAdpater = MyMovieSearchAdpater(arrayListOf())
-    private lateinit var searchViewModel: SearchViewModel
+    private val searchViewModel: SearchViewModel by viewModels()
     var page =1
     var totalPage =1
     var keyword =""
@@ -82,7 +85,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     fun observe(){
-        searchViewModel=ViewModelProvider(this)[SearchViewModel::class.java]
+//        searchViewModel=ViewModelProvider(this)[SearchViewModel::class.java]
         searchViewModel.data.observe(this, Observer {
             it?.let {
                 list.addAll(it)

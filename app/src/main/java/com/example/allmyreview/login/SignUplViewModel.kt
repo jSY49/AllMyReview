@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 import com.example.allmyreview.ReviewDb
 import com.example.allmyreview.signUpRetrofit.signUpRetrofitClient
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class SignUplViewModel :ViewModel() {
+class SignUplViewModel @Inject constructor()  :ViewModel() {
 
     val TAG = "SignUplViewModel"
     var job: Job? = null

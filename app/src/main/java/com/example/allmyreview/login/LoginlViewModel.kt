@@ -8,9 +8,12 @@ import com.example.allmyreview.ReviewDb
 import com.example.allmyreview.loginRetorfit.LOGIN
 import com.example.allmyreview.loginRetorfit.LoginRetrofitClient
 import com.example.allmyreview.signUpRetrofit.signUpRetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class LoginlViewModel :ViewModel() {
+@HiltViewModel
+class LoginlViewModel @Inject constructor() :ViewModel() {
 
     val TAG = "LoginlViewModel"
     var job: Job? = null

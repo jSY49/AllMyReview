@@ -6,10 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.allmyreview.Review
 import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 
-class ReviewViewModel : ViewModel() {
+@HiltViewModel
+class ReviewViewModel @Inject constructor(): ViewModel() {
 
     val TAG = "ReviewViewModel"
     var loginCheck = MutableLiveData<Boolean>()

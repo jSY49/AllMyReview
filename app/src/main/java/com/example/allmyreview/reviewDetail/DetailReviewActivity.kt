@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,13 +17,14 @@ import com.example.allmyreview.R
 import com.example.allmyreview.databinding.ActivityDetailReviewBinding
 import com.example.allmyreview.movieDetail.MovieDetailViewModel
 import com.example.allmyreview.updateReview.updateReviewActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class DetailReviewActivity : AppCompatActivity() {
     val TAG = "DetailReviewActivity"
     private lateinit var binding: ActivityDetailReviewBinding
-    private lateinit var detailReviewViewModel: DetailReviewViewModel
-    private lateinit var deleteReviewViewModel: DeleteReviewViewModel
+    private val detailReviewViewModel: DetailReviewViewModel by viewModels()
+    private val deleteReviewViewModel: DeleteReviewViewModel by viewModels()
 
     var movieId =0
     var userid =""
@@ -35,8 +37,8 @@ class DetailReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailReviewBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        detailReviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
-        deleteReviewViewModel = ViewModelProvider(this)[DeleteReviewViewModel::class.java]
+//        detailReviewViewModel = ViewModelProvider(this)[DetailReviewViewModel::class.java]
+//        deleteReviewViewModel = ViewModelProvider(this)[DeleteReviewViewModel::class.java]
         movieId= intent.getIntExtra("movieId", 0)
 
         val auto: SharedPreferences = getSharedPreferences("autoLogin", Activity.MODE_PRIVATE)

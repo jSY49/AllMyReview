@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ReviewFragment : Fragment() {
 
     val TAG="ReviewFragment"
-    lateinit var reviewViewModel: ReviewViewModel
+    val reviewViewModel: ReviewViewModel by viewModels()
     private var _binding: FragmentReviewBinding? = null
     private var myReviewAdapter = myReviewAdapter(arrayListOf())
     private val binding get() = _binding!!
@@ -29,7 +30,7 @@ class ReviewFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        reviewViewModel = ViewModelProvider(this)[ReviewViewModel::class.java]
+//        reviewViewModel = ViewModelProvider(this)[ReviewViewModel::class.java]
         _binding = FragmentReviewBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

@@ -5,23 +5,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.allmyreview.R
 import com.example.allmyreview.databinding.ActivitySignupBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
+@AndroidEntryPoint
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
-    private lateinit var signUpViewModel: SignUplViewModel
+    private val signUpViewModel: SignUplViewModel by viewModels()
     var IdCheck = false;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        signUpViewModel = ViewModelProvider(this)[SignUplViewModel::class.java]
+//        signUpViewModel = ViewModelProvider(this)[SignUplViewModel::class.java]
 
 
         binding.checkButton.setOnClickListener {

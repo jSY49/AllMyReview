@@ -5,9 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.allmyreview.MovieResult
 import com.example.allmyreview.MovieRetrofit.RetrofitClient
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
-class SearchViewModel : ViewModel() {
+@HiltViewModel
+class SearchViewModel @Inject constructor(): ViewModel() {
 
     val TAG = "SearchViewModel"
     private val movieService = RetrofitClient.getRetrofitService()

@@ -8,8 +8,9 @@ import com.example.allmyreview.reviewRetrofit.ReviewRetrofitClient
 import kotlinx.coroutines.*
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.inject.Inject
 
-class AddReviewViewModel :ViewModel() {
+class AddReviewViewModel @Inject constructor() :ViewModel() {
 
     val TAG="AddReviewViewModel"
     val exceptionHandler = CoroutineExceptionHandler { coroutineContext, throwable ->
