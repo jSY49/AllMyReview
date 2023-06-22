@@ -22,7 +22,7 @@ object ReviewRetrofitClient{
 
     @Provides
     @Singleton
-    private fun getRetrofit(): Retrofit = Retrofit.Builder()
+    fun getRetrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(NullOnEmptyConverterFactory())
             .addConverterFactory(GsonConverterFactory.create(gson))

@@ -17,7 +17,7 @@ object LoginRetrofitClient{
     var gson = GsonBuilder().setLenient().create()
     @Provides
     @Singleton
-    private fun getRetrofit(): Retrofit = Retrofit.Builder()
+    fun getRetrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()

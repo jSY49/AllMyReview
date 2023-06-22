@@ -19,7 +19,7 @@ object RetrofitClient{
 
     @Provides
     @Singleton
-    private fun getRetrofit(): Retrofit = Retrofit.Builder()
+    fun getRetrofit(): Retrofit = Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
